@@ -4,6 +4,8 @@
 #include <assert.h>
 #include <ctype.h>
 #include <math.h>
+#include <ncurses.h>
+#include <locale.h>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -11,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <wchar.h>
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
@@ -18,7 +21,6 @@
 #include "SDL2/SDL_ttf.h"
 
 #include "stddefine.h"
-#include "structs.h"
 
 #define MAX_INT_DIGITS 11
 #define DEBUG          1
@@ -44,8 +46,6 @@ extern float Stds_GetAngle( int32_t x1, int32_t y1, int32_t x2, int32_t y2 );
 
 extern int32_t Stds_GetDistance( int32_t x1, int32_t y1, int32_t x2, int32_t y2 );
 
-extern void Stds_Print( const char *s, ... );
-
 extern float Stds_ToRadians( float degree_angle );
 
 extern float Stds_ToDegrees( float radian_angle );
@@ -60,6 +60,8 @@ extern char *Stds_Substring( const char *str, int first, int last );
 
 extern int32_t Stds_IndexOf( const char *s, const char *search_str );
 
-extern char *Stds_StrCatInt( const char *s, int32_t n );
+extern char *Stds_StrCatIntPtr( const char *s, int32_t n );
+
+extern char *Stds_StrCatIntArray( const char s[], int32_t n);
 
 #endif // STDS_H

@@ -1,5 +1,5 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = src/*.c tests/src/*.c lib/structures/src/*.c
+OBJS = src/*.c lib/stds/src/*.c lib/structures/src/*.c
 
 #CC specifies which compiler we're using
 CC = gcc
@@ -24,7 +24,7 @@ LINKER_FLAGS = 0
 ifeq ($(OS), Windows_NT)
 	LINKER_FLAGS = -lmingw32
 else
-	LINKER_FLAGS = -lm
+	LINKER_FLAGS = -lm -lcurses
 endif
 
 #OBJ_NAME specifies the name of our exectuable

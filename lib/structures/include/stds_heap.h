@@ -1,7 +1,7 @@
 #ifndef STDS_HEAP_H
 #define STDS_HEAP_H
 
-#include "../../../include/stds.h"
+#include "../../stds/include/stds.h"
 
 #include "stds_data.h"
 

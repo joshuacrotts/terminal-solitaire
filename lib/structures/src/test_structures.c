@@ -1,32 +1,36 @@
-#include "../include/stds_queue.h"
-#include "../include/stds_stack.h"
-#include "../include/stds_vector.h"
+// #include "../include/stds_vector.h"
 
 // int
 // main( int argc, char *argv[] ) {
-//   stds_queue_t *q;
-//   q = Stds_QueueCreate( sizeof( int32_t ) );
+//   /* Specify the type of the arraylist as a parameter. */
+//   stds_vector_t *v = Stds_VectorCreate( sizeof( int32_t ) );
 
-//   Stds_QueueAdd( q, ( void * ) 331233 );
-//   Stds_QueueAdd( q, ( void * ) 231 );
-//   Stds_QueueAdd( q, ( void * ) 3123 );
-//   Stds_QueueAdd( q, ( void * ) 3241 );
+//   /* Append void pointer-casted values.*/
+//   Stds_VectorAppend( v, ( void * ) 1 );
+//   Stds_VectorAppend( v, ( void * ) 2 );
+//   Stds_VectorAppend( v, ( void * ) 3 );
+//   Stds_VectorAppend( v, ( void * ) 4 );
+//   Stds_VectorAppend( v, ( void * ) 5 );
+//   Stds_VectorAppend( v, ( void * ) 6 );
+//   Stds_VectorAppend( v, ( void * ) 7 );
+//   Stds_VectorAppend( v, ( void * ) 8 );
+//   Stds_VectorAppend( v, ( void * ) 9 );
+//   Stds_VectorAppend( v, ( void * ) 9 );
+//   Stds_VectorAppend( v, ( void * ) 9 );
+//   Stds_VectorAppend( v, ( void * ) 9 );
+//   Stds_VectorAppend( v, ( void * ) 9 );
+  
 
-//   stds_queue_node_t *n;
-//   n = Stds_QueueIterator( q );
-
-//   while ( n != NULL ) {
-//     Stds_Print( "%d\n", ( ( int32_t * ) ( n->data ) ) );
-//     n = n->next;
+//   /* Print out the values. */
+//   for ( int i = 0; i < Stds_VectorSize( v ); i++ ) {
+//     printf( "%d\n", *( int32_t * ) Stds_VectorGet( v, i ) );
 //   }
 
-//   stds_queue_node_t *r;
-//   r = Stds_QueuePoll( q );
-
-//   n = Stds_QueueIterator( q );
-
-//   while ( n != NULL ) {
-//     Stds_Print( "%d\n", ( ( int32_t * ) ( n->data ) ) );
-//     n = n->next;
+//   printf( "Removing index 0 which should be element 0.\n\n\n" );
+//   Stds_VectorRemove( v, 0 );
+//   for ( int i = 0; i < Stds_VectorSize( v ); i++ ) {
+//     printf( "%d\n", *( int32_t * ) Stds_VectorGet( v, i ) );
 //   }
+
+//   Stds_VectorDestroy( v );
 // }

@@ -207,29 +207,6 @@ Stds_GetDistance( int32_t x1, int32_t y1, int32_t x2, int32_t y2 ) {
 }
 
 /**
- * Stds_Prints to the SDL LogInfo stream. This is just to
- * prevent having to type out the long line if you
- * want to do simple debugging. Supports varargs
- * and formatting.
- *
- * @param const char* string.
- * @param ... variable arguments.
- *
- * @return void.
- */
-void
-Stds_Print( const char *str, ... ) {
-  va_list args;
-  memset( &text_buffer, '\0', sizeof( text_buffer ) );
-
-  va_start( args, str );
-  vsprintf( text_buffer, str, args );
-  va_end( args );
-
-  SDL_LogInfo( SDL_LOG_CATEGORY_APPLICATION, "%s", text_buffer );
-}
-
-/**
  *
  *
  * @param
@@ -269,44 +246,6 @@ Stds_ToDegrees( float radians ) {
 }
 
 /**
- * Converts an integer into an SDL_Color object. The number should
- * be an unsigned 32-bit integer in the form
- *
- * 0xAARRGGBB (ARGB)
- *
- * @param uint32_t color to be converted.
- *
- * @return SDL_Color object.
- */
-SDL_Color
-Stds_ConvertARGBToColor( uint32_t c ) {
-  uint8_t   r     = c >> 16 & 0xff;
-  uint8_t   g     = c >> 8 & 0xff;
-  uint8_t   b     = c & 0xff;
-  uint8_t   a     = c >> 24 & 0xff;
-  SDL_Color color = { r, g, b, a };
-  return color;
-}
-
-/**
- * Converts a SDL_Color object into an unsigned 32bit integer.
- *
- * @param SDL_Color * color to be converted.
- *
- * @return uint32_t color integer representation.
- */
-uint32_t
-Stds_ConvertColorToARGB( SDL_Color *c ) {
-  uint32_t color;
-  color |= c->a << 24;
-  color |= c->r << 16;
-  color |= c->g << 8;
-  color |= c->b;
-
-  return color;
-}
-
-/**
  * Finds and returns the substring between the indices
  * [first, last). (last - first) gives the number of characters
  * inside the returning char*.
@@ -327,17 +266,17 @@ Stds_Substring( const char *str, int first, int last ) {
 
   /* Primitive error checking... */
   if ( s_len <= 0 ) {
-    Stds_Print( "Error: your string cannot be empty: %d.\n", s_len );
+    printf( "Error: your string cannot be empty: %d.\n", s_len );
     exit( EXIT_FAILURE );
   } else if ( first >= last ) {
-    Stds_Print( "Error:: your first index %d cannot more than or equal to your last %d.\n", first,
+    printf( "Error:: your first index %d cannot more than or equal to your last %d.\n", first,
                 last );
     exit( EXIT_FAILURE );
   } else if ( first < 0 ) {
-    Stds_Print( "Error: your first index cannot be less than 0. %d.\n", first );
+    printf( "Error: your first index cannot be less than 0. %d.\n", first );
     exit( EXIT_FAILURE );
   } else if ( last >= s_len ) {
-    Stds_Print( "Error: your last index cannot be >= length of your string. %d.\n", last );
+    printf( "Error: your last index cannot be >= length of your string. %d.\n", last );
     exit( EXIT_FAILURE );
   }
 
@@ -361,10 +300,10 @@ Stds_IndexOf( const char *s, const char *search_str ) {
   uint32_t search_str_len = strlen( search_str );
 
   if ( s_len <= 0 ) {
-    Stds_Print( "Error: your string cannot be empty: %d.\n", s_len );
+    printf( "Error: your string cannot be empty: %d.\n", s_len );
     exit( EXIT_FAILURE );
   } else if ( s_len < search_str_len ) {
-    Stds_Print( "Error: your string length of %d is less than your search string length of %d.\n",
+    printf( "Error: your string length of %d is less than your search string length of %d.\n",
                 s_len, search_str_len );
     exit( EXIT_FAILURE );
   }
@@ -389,7 +328,19 @@ Stds_IndexOf( const char *s, const char *search_str ) {
  * @return void.
  */
 char *
-Stds_StrCatInt( const char *s, int32_t n ) {
+Stds_StrCatIntPtr( const char *s, int32_t n ) {
+  memset( text_buffer, '\0', sizeof( text_buffer ) );
+  strncat( text_buffer, s, strlen( s ) );
+  int32_t digits = sprintf( number_buffer, "%d", n );
+  strncat( text_buffer, number_buffer, digits );
+  return text_buffer;
+}
+
+/**
+ *
+ */
+char *
+Stds_StrCatIntArray( const char s[], int32_t n ) {
   memset( text_buffer, '\0', sizeof( text_buffer ) );
   strncat( text_buffer, s, strlen( s ) );
   int32_t digits = sprintf( number_buffer, "%d", n );
