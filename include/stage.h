@@ -3,6 +3,7 @@
 
 #include "card.h"
 #include "deck.h"
+#include "parser.h"
 
 #include "../lib/stds/include/stds.h"
 

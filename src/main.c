@@ -14,7 +14,13 @@ main( int argc, char *argv[] ) {
 }
 
 /**
- *
+ * Initializes the random time seed and 
+ * sets the locale to allow for unicode symbols
+ * in the ncurses window.
+ * 
+ * @param void.
+ * 
+ * @return void.
  */
 static void
 init_game( void ) {
@@ -23,7 +29,12 @@ init_game( void ) {
 }
 
 /**
+ * Initialies the ncurses screen and color components. We also
+ * initialize the two color types for solitaire: red and black.
  * 
+ * @param void.
+ * 
+ * @return void.
  */
 static void
 init_ncurses( void ) {
@@ -38,7 +49,6 @@ init_ncurses( void ) {
   start_color();
   raw();
   keypad( stdscr, true );
-  noecho();
   init_pair( BLACK_PAIR, COLOR_BLACK, COLOR_BLACK );
   init_pair( RED_PAIR, COLOR_RED, COLOR_BLACK );
 }

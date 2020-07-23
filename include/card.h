@@ -2,7 +2,7 @@
 #define CARD_H
 
 #define BLACK_PAIR 1
-#define RED_PAIR 2
+#define RED_PAIR   2
 
 #include "../lib/stds/include/stds.h"
 
@@ -13,6 +13,7 @@ enum RANK { R_A, R_2, R_3, R_4, R_5, R_6, R_7, R_8, R_9, R_10, R_J, R_Q, R_K };
 struct card_t {
   enum SUIT suit;
   enum RANK rank;
+  bool      is_hidden;
 };
 
 extern struct card_t *create_card( enum SUIT suit, enum RANK rank );
@@ -35,6 +36,6 @@ extern const char *get_suit_char( enum SUIT suit );
 
 extern const char *get_rank_char( enum RANK rank );
 
-extern void printw_card( struct card_t *c );
+extern void printw_card( struct card_t *c, bool is_hidden );
 
 #endif // CARD_H
