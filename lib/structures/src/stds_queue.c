@@ -62,7 +62,7 @@ void *
 Stds_QueuePoll( struct stds_queue_t *q ) {
   if ( Stds_QueueIsEmpty( q ) ) {
     printf( "Error! Cannot poll on an empty queue.\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   stds_queue_node_t *n = q->head;
@@ -122,7 +122,7 @@ inline void *
 Stds_QueuePeek( struct stds_queue_t *q ) {
   if ( Stds_QueueIsEmpty( q ) ) {
     printf( "Error! Cannot peek on an empty queue.\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   return q->head->data;

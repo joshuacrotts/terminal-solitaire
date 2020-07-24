@@ -28,7 +28,7 @@ Stds_VectorCreate( size_t element_size ) {
 
   if ( v == NULL ) {
     printf( "Error: could not allocate memory for stds_vector_t!\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   memset( v, 0, sizeof( stds_vector_t ) );
@@ -68,7 +68,7 @@ void
 Stds_VectorInsert( stds_vector_t *v, ssize_t index, void *data ) {
   if ( index < 0 || index >= v->capacity ) {
     printf( "Failed to insert, index out of bounds error: %d.\n", index );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
   v->logical_size++;
 
@@ -88,28 +88,27 @@ Stds_VectorInsert( stds_vector_t *v, ssize_t index, void *data ) {
  */
 void *
 Stds_VectorGet( const stds_vector_t *v, ssize_t index ) {
-  if ( index < 0 || index >= v->capacity || Stds_VectorIsEmpty( v ) ) {
+  if ( index < 0 || index >= v->logical_size || Stds_VectorIsEmpty( v ) ) {
     printf( "Failed to get element, index out of bounds error: %d.\n", index );
-    exit( EXIT_FAILURE );
+    return NULL;
   }
   return v->data[index];
 }
 
 /**
  * Swaps two elements in a vector.
- * 
+ *
  * @param size_t first index to swap.
  * @param size_t second index to swap.
- * 
+ *
  * @return void.
  */
-inline void 
+inline void
 Stds_VectorSwap( stds_vector_t *v, size_t first, size_t second ) {
-  void *tmp = v->data[first];
-  v->data[first] = v->data[second];
+  void *tmp       = v->data[first];
+  v->data[first]  = v->data[second];
   v->data[second] = tmp;
 }
-
 
 /**
  * Removes an element from a vector.
@@ -121,7 +120,7 @@ Stds_VectorSwap( stds_vector_t *v, size_t first, size_t second ) {
  */
 void
 Stds_VectorRemove( stds_vector_t *v, ssize_t index ) {
-  if ( index < 0 || index >= v->capacity || Stds_VectorIsEmpty( v ) ) {
+  if ( index < 0 || index >= v->logical_size || Stds_VectorIsEmpty( v ) ) {
     printf( "Failed to remove, index out of bounds error: %d.\n", index );
     exit( EXIT_FAILURE );
   }
@@ -175,7 +174,7 @@ Stds_VectorClear( stds_vector_t *v ) {
 
   if ( v->data == NULL ) {
     printf( "Error: could not allocate memory for the data void** in stds_vector_t!\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 }
 

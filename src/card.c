@@ -140,7 +140,7 @@ get_suit_char( enum SUIT suit ) {
     return "\u2666";
   default:
     printf( "Invalid suit: %d.\n", suit );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 }
 
@@ -170,7 +170,7 @@ get_rank_char( enum RANK rank ) {
     return "K";
   default:
     printf( "Invalid rank: %d.\n", rank );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 }
 

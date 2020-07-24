@@ -18,7 +18,7 @@ create_foundation( void ) {
 
   if ( f == NULL ) {
     printf( "Error: could not allocate memory for foundation_deck_t struct.\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   memset( f, 0, sizeof( struct foundation_deck_t ) );
@@ -43,7 +43,7 @@ create_stock_deck( void ) {
 
   if ( s == NULL ) {
     printf( "Error: could not allocate memory for stock_deck_t struct.\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   memset( s, 0, sizeof( struct stock_deck_t ) );
@@ -77,7 +77,7 @@ create_waste_deck( void ) {
 
   if ( w == NULL ) {
     printf( "Error: could not allocate memory for waste_deck_t struct.\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   memset( w, 0, sizeof( struct waste_deck_t ) );
@@ -102,7 +102,7 @@ create_layout_deck( void ) {
 
   if ( l == NULL ) {
     printf( "Error: could not allocate memory for layout_deck_t struct.\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   memset( l, 0, sizeof( struct layout_deck_t ) );

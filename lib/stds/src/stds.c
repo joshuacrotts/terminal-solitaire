@@ -267,17 +267,17 @@ Stds_Substring( const char *str, int first, int last ) {
   /* Primitive error checking... */
   if ( s_len <= 0 ) {
     printf( "Error: your string cannot be empty: %d.\n", s_len );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   } else if ( first >= last ) {
     printf( "Error:: your first index %d cannot more than or equal to your last %d.\n", first,
                 last );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   } else if ( first < 0 ) {
     printf( "Error: your first index cannot be less than 0. %d.\n", first );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   } else if ( last >= s_len ) {
     printf( "Error: your last index cannot be >= length of your string. %d.\n", last );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   char *s = malloc( sizeof( char ) * ( last - first ) );
@@ -301,11 +301,11 @@ Stds_IndexOf( const char *s, const char *search_str ) {
 
   if ( s_len <= 0 ) {
     printf( "Error: your string cannot be empty: %d.\n", s_len );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   } else if ( s_len < search_str_len ) {
     printf( "Error: your string length of %d is less than your search string length of %d.\n",
                 s_len, search_str_len );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   const char *ptr = strstr( s, search_str );

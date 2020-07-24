@@ -19,6 +19,7 @@ static void print_waste( void );
 static void print_layouts( void );
 static void print_foundations( void );
 static void prompt_input( void );
+static void restock( void );
 static void cleanup_stage( void );
 
 /**
@@ -44,6 +45,7 @@ game_loop( void ) {
 
     move( 20, 0 );
     getstr( input_buffer );
+    restock();
     parse_pattern( input_buffer );
     memset( input_buffer, 0, sizeof( input_buffer ) );
     refresh();
@@ -56,9 +58,9 @@ game_loop( void ) {
  * and layout. There are four foundation decks, with seven layout decks.
  * The stock deck is poplated, and shuffled. Then the remaining decks (particularly
  * the layouts) are populated.
- * 
+ *
  * @param void.
- * 
+ *
  * @return void.
  */
 static void
@@ -109,9 +111,9 @@ deal_decks( void ) {
 
 /**
  * Prints the seven headers for each top column.
- * 
+ *
  * @param void.
- * 
+ *
  * @return void.
  */
 static void
@@ -124,9 +126,9 @@ print_headers( void ) {
 
 /**
  * Prints the top card of the stock deck.
- * 
+ *
  * @param void.
- * 
+ *
  * @return void.
  */
 static void
@@ -147,9 +149,9 @@ print_stock( void ) {
 
 /**
  * Prints the top of the waste deck.
- * 
+ *
  * @param void.
- * 
+ *
  * @return void.
  */
 static void
@@ -171,9 +173,9 @@ print_waste( void ) {
 
 /**
  * Prints the foundations.
- * 
+ *
  * @param void.
- * 
+ *
  * @return void.
  */
 static void
@@ -198,10 +200,10 @@ print_foundations( void ) {
 }
 
 /**
- * Prints the layouts and their cards. 
- * 
+ * Prints the layouts and their cards.
+ *
  * @param void.
- * 
+ *
  * @return void.
  */
 static void
@@ -226,12 +228,12 @@ print_layouts( void ) {
     for ( int32_t j = Stds_VectorSize( d ), y = card_start_pos; j > 0; j--, y++ ) {
       move( y, i * COL_SIZE );
       struct card_t *c = ( struct card_t * ) Stds_VectorGet( d, Stds_VectorSize( d ) - j );
-      
+
       /* If a card is suddenly the last one on the pile, make it visible.*/
-      if (j == 1) {
+      if ( j == 1 ) {
         c->is_hidden = false;
       }
-      
+
       printw_card( c, c->is_hidden );
     }
   }
@@ -241,9 +243,9 @@ print_layouts( void ) {
  * Prompts the user to enter an input. This string
  * is read in via ncurses, and stored in a small buffer
  * for later parsing.
- * 
+ *
  * @param void.
- * 
+ *
  * @return void.
  */
 static void
@@ -253,11 +255,33 @@ prompt_input( void ) {
 }
 
 /**
- * Cleans up the stage and the pointers/decks associated with
- * the game.
+ * Resets the stock deck by moving all cards from the waste
+ * deck back to the stock deck.
  * 
  * @param void.
  * 
+ * @return void.
+ */
+static void
+restock( void ) {
+  stds_vector_t *sd = stock_deck->deck;
+  stds_vector_t *wd = waste_deck->deck;
+
+  if ( Stds_VectorIsEmpty( sd ) ) {
+    for ( int32_t i = Stds_VectorSize( wd ) - 1; i >= 0; i--) {
+       struct card_t *top = (struct card_t *)Stds_VectorGet(wd, i);
+       Stds_VectorRemove(wd, i);
+       Stds_VectorAppend(sd, (void*)top);
+    }
+  }
+}
+
+/**
+ * Cleans up the stage and the pointers/decks associated with
+ * the game.
+ *
+ * @param void.
+ *
  * @return void.
  */
 static void

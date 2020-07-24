@@ -43,7 +43,7 @@ init_ncurses( void ) {
   if ( has_colors() == false ) {
     printf( "Colors are not supported by this terminal.\n" );
     endwin();
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   start_color();

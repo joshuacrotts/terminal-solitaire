@@ -28,7 +28,7 @@ Stds_StackCreate( size_t element_size ) {
 
   if ( s == NULL ) {
     printf( "Error: could not allocate memory for stds_stack_t!\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
   
   memset( s, 0, sizeof( stds_stack_t ) );
@@ -63,7 +63,7 @@ void *
 Stds_StackPop( struct stds_stack_t *s ) {
   if ( Stds_StackIsEmpty( s ) ) {
     printf( "Error! Cannot pop an empty stack.\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   void *removed_data           = Stds_StackPeek( s );
@@ -102,7 +102,7 @@ inline void *
 Stds_StackPeek( struct stds_stack_t *s ) {
   if ( Stds_StackIsEmpty( s ) ) {
     printf( "Error! Cannot peek an empty stack.\n" );
-    exit( EXIT_FAILURE );
+    // exit( EXIT_FAILURE );
   }
 
   return s->data[s->logical_size - 1];
