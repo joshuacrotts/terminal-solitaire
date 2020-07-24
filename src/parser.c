@@ -1,6 +1,8 @@
 #include "../include/parser.h"
 
 static void stock_to_waste( void );
+static void handle_waste_src( int8_t src_id, int8_t src_no, int8_t dest_id, int8_t dest_no );
+static void handle_layout_src( int8_t src_id, int8_t src_no, int8_t dest_id, int8_t dest_no );
 
 /**
  * Parses the input from the user. This input is
@@ -33,54 +35,69 @@ parse_pattern( const char *input ) {
     int8_t no_cards = atoi( no_cards_str );
 
     /* Get the source of the movement. */
-    char src_id = input[5];
-    int  src_no = input[6] - '0';
+    char   src_id = input[5];
+    int8_t src_no = input[6] - '0';
 
     /* Get the destination of the movement. */
-    char dest_id = input[8];
-    int  dest_no = input[9] - '0';
+    char   dest_id = input[8];
+    int8_t dest_no = input[9] - '0';
 
     move( 10, 0 );
 
-    /* Parse the pattern. */
     /* If the source comes from the waste. */
-    if ( src_id == 'w' && src_no == 0 ) {
-
-      /* For now, just assume one card is being transferred... */
-      struct card_t *c = ( struct card_t * ) Stds_VectorGet(
-          waste_deck->deck, Stds_VectorSize( waste_deck->deck ) - 1 );
-      Stds_VectorRemove( waste_deck->deck, Stds_VectorSize( waste_deck->deck ) - 1 );
-
-      /* If the dest goes to the foundation. */
-      if ( dest_id == 'f' && dest_no >= 1 && dest_no <= 4 ) {
-        move( 30, 0 );
-        printw( "%d\n", dest_no );
-        Stds_VectorAppend( foundation_decks[dest_no - 1]->deck, ( void * ) c );
-      }
-      /* If the dest goes to a column. */
-      else if ( dest_id == 'c' && dest_no >= 1 && dest_no <= 7 ) {
-        Stds_VectorAppend( layout_decks[dest_no - 1]->deck, ( void * ) c );
-      }
-    }
+    handle_waste_src( src_id, src_no, dest_id, dest_no );
 
     /* Else if the source comes from the layout cards. */
-    else if ( src_id == 'c' && src_no >= 1 && src_no <= 7 ) {
-      /* For now, just assume one card is being transferred... */
-      struct card_t *c = ( struct card_t * ) Stds_VectorGet(
-          layout_decks[src_no - 1]->deck, Stds_VectorSize( layout_decks[src_no - 1]->deck ) - 1 );
-      Stds_VectorRemove( layout_decks[src_no - 1]->deck,
-                         Stds_VectorSize( layout_decks[src_no - 1]->deck ) - 1 );
+    handle_layout_src( src_id, src_no, dest_id, dest_no );
+  }
+}
 
-      /* If the dest goes to the foundation. */
-      if ( dest_id == 'f' && dest_no >= 1 && dest_no <= 4 ) {
-        stds_vector_t *fd         = foundation_decks[dest_no - 1]->deck;
-        struct card_t *top_f_card = Stds_VectorGet( fd, Stds_VectorSize( fd ) - 1 );
-        Stds_VectorAppend( fd, ( void * ) c );
-      }
-      /* If the dest goes to a column. */
-      else if ( dest_id == 'c' && dest_no >= 1 && dest_no <= 7 ) {
-        Stds_VectorAppend( layout_decks[dest_no - 1]->deck, ( void * ) c );
-      }
+/**
+ *
+ */
+static void
+handle_waste_src( int8_t src_id, int8_t src_no, int8_t dest_id, int8_t dest_no ) {
+  if ( src_id == 'w' && src_no == 0 ) {
+
+    /* For now, just assume one card is being transferred... */
+    struct card_t *c = ( struct card_t * ) Stds_VectorGet(
+        waste_deck->deck, Stds_VectorSize( waste_deck->deck ) - 1 );
+    Stds_VectorRemove( waste_deck->deck, Stds_VectorSize( waste_deck->deck ) - 1 );
+
+    /* If the dest goes to the foundation. */
+    if ( dest_id == 'f' && dest_no >= 1 && dest_no <= 4 ) {
+      move( 30, 0 );
+      printw( "%d\n", dest_no );
+      Stds_VectorAppend( foundation_decks[dest_no - 1]->deck, ( void * ) c );
+    }
+    /* If the dest goes to a column. */
+    else if ( dest_id == 'c' && dest_no >= 1 && dest_no <= 7 ) {
+      Stds_VectorAppend( layout_decks[dest_no - 1]->deck, ( void * ) c );
+    }
+  }
+}
+
+/**
+ *
+ */
+static void
+handle_layout_src( int8_t src_id, int8_t src_no, int8_t dest_id, int8_t dest_no ) {
+  if ( src_id == 'c' && src_no >= 1 && src_no <= 7 ) {
+    /* For now, just assume one card is being transferred... */
+    struct card_t *c = ( struct card_t * ) Stds_VectorGet(
+        layout_decks[src_no - 1]->deck, Stds_VectorSize( layout_decks[src_no - 1]->deck ) - 1 );
+    Stds_VectorRemove( layout_decks[src_no - 1]->deck,
+                       Stds_VectorSize( layout_decks[src_no - 1]->deck ) - 1 );
+
+    /* If the dest goes to the foundation. */
+    if ( dest_id == 'f' && dest_no >= 1 && dest_no <= 4 ) {
+      stds_vector_t *fd         = foundation_decks[dest_no - 1]->deck;
+      struct card_t *top_f_card = Stds_VectorGet( fd, Stds_VectorSize( fd ) - 1 );
+      Stds_VectorAppend( fd, ( void * ) c );
+    }
+    /* If the dest goes to a column. */
+    else if ( dest_id == 'c' && dest_no >= 1 && dest_no <= 7 ) {
+      Stds_VectorAppend( layout_decks[dest_no - 1]->deck, ( void * ) c );
     }
   }
 }
