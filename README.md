@@ -13,7 +13,7 @@ Terminal - Solitaire is an implementation of the classic Solitaire game... but i
 
 The only dependency for this project is the ncurses library, which is preinstalled on most Linux distributions.
 
-## Rebuilding Terminal - Standards
+## Rebuilding Terminal - Solitaire
 
 **Linux**: To rebuild the code, clone the repository to your computer. Assuming that you have ncurses installed, the project should compile without question.
 
