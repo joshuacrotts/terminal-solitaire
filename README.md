@@ -1,7 +1,7 @@
 <h1 align="center">Terminal Solitaire</h1>
 
 <p align="center">
-  <img width="622" height="350" src="docs/soltaire.gif">
+  <img width="622" height="350" src="docs/solitaire.gif">
 </p>
 
 [![CodeFactor](https://www.codefactor.io/repository/github/joshuacrotts/Terminal-Solitaire/badge)](https://www.codefactor.io/repository/github/joshuacrotts/Terminal-Solitaire) ![GitHub contributors](https://img.shields.io/github/contributors/JoshuaCrotts/Terminal-Solitaire) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/JoshuaCrotts/Terminal-Solitaire) ![GitHub repo size](https://img.shields.io/github/repo-size/JoshuaCrotts/Terminal-Solitaire)  ![](https://tokei.rs/b1/github/JoshuaCrotts/Terminal-Solitaire) ![](https://tokei.rs/b1/github/JoshuaCrotts/Terminal-Solitaire?category=files) [![GitHub issues open](https://img.shields.io/github/issues/JoshuaCrotts/Terminal-Solitaire)]() 
