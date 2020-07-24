@@ -41,8 +41,6 @@ parse_pattern( const char *input ) {
     int  dest_no = input[9] - '0';
 
     move( 10, 0 );
-    printw( "Command: %c --- Number of cards: %d --- Src: %c%d Dest: %c%d", cmd, no_cards, src_id,
-            src_no, dest_id, dest_no );
 
     /* Parse the pattern. */
     /* If the source comes from the waste. */
